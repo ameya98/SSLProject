@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./favicon.ico">
+
+    <title>PageGen</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- modalPageGen -->
+    <div class="modal fade" id="modalPageGen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalCreatorsLabel">
+              PageGen
+              <small class="text-muted">A Dynamic Homepage Generator</small>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            PageGen automatically generates a homepage based on certain datafields filled in by the user.
+            <br>
+            Choose from multiple themes, and get your own homepage today!
+            <br>
+            Created with Django v1.11 and Bootstrap v4.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modalCreators -->
+    <div class="modal fade" id="modalCreators" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalCreatorsLabel">
+              Created By
+              <small class="text-muted">Second Year CSE Students at IIT Guwahati</small>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+
+                <li class="list-group-item list-group-item-dark">Ameya Daigavane</li>
+                <li class="list-group-item list-group-item-light">Akul Agrawal</li>
+                <li class="list-group-item list-group-item-dark">Divyam Agrawal</li>
+            </ul>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <header class="masthead clearfix">
+
+            <div class="inner">
+              <h1 class="masthead-brand">
+                PageGen
+              </h1>
+              <nav class="nav nav-masthead">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#modalPageGen">What is PageGen?</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#modalCreators">About the Creators</a>
+              </nav>
+            </div>
+
+          </header>
+
+          <main role="main" class="inner cover">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="First Name">
+            </div>
+            <br>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Last Name">
+            </div>
+            <br>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2">
+              <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
+            </div>
+            <br>
+            <label for="basic-url">Your Homepage URL</label>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon3">http://shilloi.iitg.ernet.in/</span>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-addon">.00</span>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">$</span>
+              <span class="input-group-addon">0.00</span>
+              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            </div>
+
+            <br>
+            <div class="col-md-4 offset-md-4">
+              <button type="button" class="btn btn-outline-light btn-block">Go!</button>
+            </div>
+          </main>
+
+          <footer class="mastfoot">
+            <div class="inner">
+              <p>Just a click away from a personalized homepage...</p>
+            </div>
+          </footer>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./jquery-3.2.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="./popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+  </body>
+</html>
