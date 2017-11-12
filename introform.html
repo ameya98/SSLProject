@@ -97,7 +97,7 @@
           </header>
 
           <main role="main" class="inner cover">
-            <form action="#" method="GET" onsubmit="submitForm()">
+            <form action="#" method="POST" onsubmit="submitForm()">
             <div class="row">
               <div class="col">
                 <input type="text" name="firstname" class="form-control" placeholder="First Name">
@@ -108,16 +108,32 @@
               </div>
             </div>
             <br>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2">
-              <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2">
+                  <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
+                </div>
+
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="custom-file d-block">
+                    <input data-toggle="custom-file" data-target="#company-logo" type="file" name="company_logo" accept="image/png" class="custom-file-input">
+                    <span id="company-logo" class="custom-file-control custom-file-name text-muted" data-content="Upload company logo..."></span>
+                  </label>
+                </div>
+              </div>
             </div>
-            <br>
-            <label for="basic-url">Your Homepage URL</label>
+
+
+            <label for="basic-url">Your Homepage URL:</label>
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon3">http://shilloi.iitg.ernet.in/</span>
               <input type="text" name="webmail" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
+
             <br>
             <h6 class="text-center">Courses</h6>
 
@@ -232,15 +248,13 @@
 
       </div>
     </div>
-    </div>
-    </div>
-
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./lodash.js"></script>
     <script>window.jQuery || document.write('<script src="./jquery-3.2.1.min.js"><\/script>')</script>
     <link rel="stylesheet" type="text/css" media="screen" href="./bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css">
     <script src="./bootstrap-select-1.12.4/dist/js/bootstrap-select.min.js"></script>
