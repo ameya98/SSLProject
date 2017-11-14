@@ -28,13 +28,32 @@ $('body').on('change', 'input[type="file"][data-toggle="custom-file"]', function
 
    });
 
-function submitForm(oFormElement)
-{
-     console.log('submitted');
+   function post(path, parameters) {
+       var form = $('<form></form>');
 
-     var xhr = new XMLHttpRequest();
-     xhr.onload = function(){ alert (xhr.responseText); }
-     xhr.open (oFormElement.method, oFormElement.action, true);
-     xhr.send (new FormData (oFormElement));
-     return false; // Markus had to return true */
+       form.attr("method", "post");
+       form.attr("action", path);
+
+       $.each(parameters, function(key, value) {
+           var field = $('<input></input>');
+
+           field.attr("type", "hidden");
+           field.attr("name", key);
+           field.attr("value", value);
+
+           form.append(field);
+       });
+
+       // The form needs to be a part of the document in
+       // order for us to be able to submit it.
+       $(document.body).append(form);
+       form.submit();
+   }
+
+function submitForm(passForm)
+{
+    console.log('submitted');
+    console.log(passForm);
+
+
 }
