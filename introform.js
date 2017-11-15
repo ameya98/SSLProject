@@ -52,8 +52,7 @@ $('body').on('change', 'input[type="file"][data-toggle="custom-file"]', function
 
 function submitForm(passForm)
 {
-    console.log('submitted');
-    console.log(passForm);
+    console.log("submitted");
 
 
 }

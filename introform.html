@@ -97,7 +97,7 @@
           </header>
 
           <main role="main" class="inner cover">
-            <form action="" method="POST" onsubmit="submitForm()">
+            <form action="submit.php" method="POST" onsubmit="submitForm()">
             <div class="row">
               <div class="col">
                 <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
@@ -112,7 +112,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
+                  <input type="text" name="webmail" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
                   <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
                 </div>
 
@@ -120,8 +120,8 @@
               <div class="col">
                 <div class="form-group">
                   <label class="custom-file d-block">
-                    <input data-toggle="custom-file" data-target="#company-logo" type="file" name="company_logo" accept="image/png" class="custom-file-input">
-                    <span id="company-logo" class="custom-file-control custom-file-name text-muted" data-content="An image (optional)"></span>
+                    <input data-toggle="custom-file" data-target="#imfile" type="file" name="image" accept="image/png" class="custom-file-input">
+                    <span id="imfile" class="custom-file-control custom-file-name text-muted" data-content="An image (optional)"></span>
                   </label>
                 </div>
               </div>
@@ -131,7 +131,7 @@
             <h6 class="text-center">Your Homepage URL</h6>
             <div class="input-group">
               <span class="input-group-addon" id="basic-addon3">http://shilloi.iitg.ernet.in/</span>
-              <input type="text" name="webmail" class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
+              <input type="text" name="url" class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
             </div>
 
             <br>
@@ -215,19 +215,19 @@
             <div id="themesdiv" class="container text-center col-md-8">
             <div class="form-check form-check-inline">
               <label class="custom-control custom-radio">
-                <input id="theme1radio" name="theme" type="radio" class="custom-control-input">
+                <input id="theme1radio" name="theme" type="radio" value="theme1" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"></span>
                 <div id="colourbox1"></div>
               </label>
               <label class="custom-control custom-radio">
-                <input id="theme2radio" name="theme" type="radio" class="custom-control-input">
+                <input id="theme2radio" name="theme" type="radio" value="theme2" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"></span>
                 <div id="colourbox2"></div>
               </label>
               <label class="custom-control custom-radio">
-                <input id="theme3radio" name="theme" type="radio" class="custom-control-input">
+                <input id="theme3radio" name="theme" type="radio" value="theme3" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"></span>
                 <div id="colourbox3"></div>
