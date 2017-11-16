@@ -27,7 +27,7 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: rgba(38, 33, 33, 0.68);
 }
 body {
   color: #fff;
@@ -179,7 +179,7 @@ body {
 }
 
 .custom-file-control {
-      line-height: 1;
+      line-height: 1.1;
 }
 
 .custom-file-name:after {
@@ -191,4 +191,33 @@ body {
   height: 100%;
   overflow: hidden;
   padding: 0.5rem 1rem;
+}
+
+#colourbox1{
+  margin-top: 2px;
+  height: 20px;
+  width: 40px;
+  background: linear-gradient(to right,  #e9ecef 0%,#e9ecef 50%,#fff 50%,#fff 100%);
+}
+
+#colourbox2{
+  margin-top: 2px;
+  height: 20px;
+  width: 40px;
+  background: linear-gradient(to right,  rgba(0, 0, 10, 0.27) 0%,rgba(0, 0, 10, 0.27) 50%, rgba(24, 100, 144, 0.09) 50%, rgba(24, 100, 144, 0.09) 100%);
+}
+
+#colourbox3{
+  margin-top: 2px;
+  height: 20px;
+  width: 40px;
+  background: linear-gradient(to right,  rgba(255, 202, 62, 0.39) 0%, rgba(255, 202, 62, 0.39) 50%,#fff 50%,#fff 100%);
+}
+
+#themesdiv
+{
+  background-color: rgba(231, 235, 249, 0.78);
+  padding-top: 15px;
+  padding-left: 30px;
+  border-radius: 5px;
 }
