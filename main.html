@@ -7,16 +7,54 @@
     <meta name="author" content="">
     <link rel="icon" href="./favicon.ico">
 
-    <title>Professor Bean at University</title>
+    <title>Professor Bean at IIT Guwahati</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+    <link href="./main1.css" rel="stylesheet">
+    <link href="./bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="./fonts/font-awesome.css" rel="stylesheet">
+
   </head>
 
   <body>
+
+    <!-- modalMeeting -->
+    <div class="modal fade" id="modalMeeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalMeetingLabel">
+              What time?
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="#">
+              <div class='row'>
+                <div class='col input-group'>
+                  <input type="text" id="fullname" class="form-control" placeholder="Full Name" required />
+                </div>
+                <div class='col input-group date' id='datetimepicker1'>
+                  <input type='text' class="form-control" id="datetime" placeholder="Time" />
+                  <span class="input-group-addon">
+                      <span class="fa fa-calendar"></span>
+                  </span>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" onclick="addmeeting()">Send Request</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+            </form>
+        </div>
+      </div>
+    </div>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">JBean</a>
@@ -30,7 +68,7 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Publications</a>
+            <a class="nav-link" href="./research.html">Research </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Students</a>
@@ -39,11 +77,11 @@
             <a class="nav-link disabled" href="#">Gallery</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teaching</a>
+            <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teaching</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">CS-707: Distributed Systems</a>
-              <a class="dropdown-item" href="#">CS-785: Adversarial Networks</a>
-              <a class="dropdown-item" href="#">CS-302: Genetic Algorithms</a>
+              <a class="dropdown-item" href="#">Course 1</a>
+              <a class="dropdown-item" href="#">Course 2</a>
+              <a class="dropdown-item" href="#">Course 3</a>
             </div>
           </li>
         </ul>
@@ -61,16 +99,17 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8">
-              <h1 class="display-3">Jonathan Bean</h1>
-              <p>Assistant Professor at University.
+              <h1 id="headingname" class="display-3">Jonathan Bean</h1>
+              <p><span id="headingtitle">Assistant Professor</span> at IIT, Guwahati.
                 <br>
                 Department of Computer Science and Engineering.
               </p>
-              <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+              <a href='./main.html' download>Download This File?</a>
             </div>
 
+
             <div class="col-md-4">
-              <img src="./images/sample.jpg" border-radius="2px" class="img-fluid rounded ffloat-right" alt="Cinque Terre">
+              <img id="headingimage" src="./images/sample.jpg" border-radius="2px" class="img-fluid rounded ffloat-right" alt="Cinque Terre">
             </div>
           </div>
 
@@ -81,42 +120,47 @@
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-md-4">
-            <h2>Education</h2>
 
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-success"><b>PhD</b> (Department of Computer Science) <br> University3 (2003-2009)</li>
-              <li class="list-group-item list-group-item-info"><b>M.S.</b> (Computer Science) <br> University2 (2001-2003)</li>
-              <li class="list-group-item list-group-item-warning"><b>B.S.</b> (Computer Science and Engineering) <br> University1 (1997-2001)</li>
-            </ul>
-
-          </div>
-
-          <div class="col-md-4">
-            <h2>Research Interests</h2>
-
-            <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-success list-group-item-action">Machine Learning<span class="badge badge-primary float-right badge-pill">5</span> </a>
-              <a href="#" class="list-group-item list-group-item-info list-group-item-action">Natural Language Processing<span class="badge badge-primary float-right badge-pill">2</span> </a>
-              <a href="#" class="list-group-item list-group-item-warning list-group-item-action">Computer Vision<span class="badge badge-primary float-right badge-pill">7</span> </a>
-            </div>
-            <br>
-          <div class="container text-center">
-            <p><a class="btn btn-success" href="#" role="button">Download CV</a></p>
-          </div>
-
-          </div>
-          <div class="col-md-4">
             <h2>Contact</h2>
 
             <ul class="list-group">
-              <li class="list-group-item list-group-item-success"><b>Room</b>: T101, CSE Department</li>
-              <li class="list-group-item list-group-item-info"><b>Phone</b>: +91 9731154414</li>
-              <li class="list-group-item list-group-item-warning"><b>Email</b>: jb@iitg.ernet.in</li>
+              <li id="roomdiv" class="list-group-item list-group-item-info"><b>Room</b>: <span id="room">T101, CSE Department</span></li>
+              <li id="phonediv" class="list-group-item list-group-item-primary"><b>Phone</b>: <span id="phone">+91 9731154414</span></li>
+              <li id="emaildiv" class="list-group-item list-group-item-info"><b>Email</b>: <span id="email">jb</span>@iitg.ernet.in</li>
             </ul>
 
             <br>
+
             <div class="container text-center">
-              <p><a class="btn btn-success" href="#" role="button">Request Meeting</a></p>
+              <p><a class="btn btn-outline-success" href="#" role="button"  data-toggle="modal" data-target="#modalMeeting">Request Meeting?</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col">
+                <h2>Calendar</h2>
+              </div>
+              <div class="col text-right">
+                <button class="btn" id="authorize-button" style="display: none;">Log In</button>
+                <button class="btn" id="signout-button" style="display: none;">Sign Out</button>
+              </div>
+          </div>
+            <iframe id="calendar" src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=iitgfac%40gmail.com&amp;color=%231B887A&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="350" height="300" frameborder="0" scrolling="no"></iframe>
+          </div>
+
+          <div class="col-md-4">
+            <h2>Publications</h2>
+
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">Paper 1<span class="badge badge-primary float-right badge-pill">link</span> </a>
+              <a href="#" class="list-group-item list-group-item-action">Paper 2<span class="badge badge-primary float-right badge-pill">link</span> </a>
+              <a href="#" class="list-group-item list-group-item-action">Paper 3<span class="badge badge-primary float-right badge-pill">link</span> </a>
+              <a href="#" class="list-group-item list-group-item-action">Paper 4<span class="badge badge-primary float-right badge-pill">link</span> </a>
+            </div>
+            <br>
+            <div class="container text-center">
+              <a class="btn btn-outline-primary" href="#" role="button">Download CV</a>
             </div>
           </div>
         </div>
@@ -134,7 +178,17 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./moment.min.js"></script>
     <script src="./popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./bootstrap-datetimepicker.min.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+     onload="this.onload=function(){};handleClientLoad()"
+     onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <script src="./main.js"></script>
+
+
   </body>
 </html>

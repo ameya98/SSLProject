@@ -13,7 +13,7 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <link href="introform.css" rel="stylesheet">
   </head>
 
   <body>
@@ -33,7 +33,7 @@
           </div>
           <div class="modal-body">
 
-            PageGen automatically generates a homepage based on certain datafields filled in by the user.
+            PageGen automatically generates a homepage based on datafields filled in by the user.
             <br>
             Choose from multiple themes, and get your own homepage today!
             <br>
@@ -53,7 +53,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="ModalCreatorsLabel">
               Created By
-              <small class="text-muted">Second Year CSE Students at IIT Guwahati</small>
+              <small class="text-muted">Three students at IIT Guwahati</small>
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -64,7 +64,7 @@
 
                 <li class="list-group-item list-group-item-dark">Ameya Daigavane</li>
                 <li class="list-group-item list-group-item-light">Akul Agrawal</li>
-                <li class="list-group-item list-group-item-dark">Divyam Agrawal</li>
+                <li class="list-group-item list-group-item-dark">Divyam Agarwal</li>
             </ul>
 
           </div>
@@ -97,62 +97,197 @@
           </header>
 
           <main role="main" class="inner cover">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="First Name">
+            <form action="submit.php" method="POST" onsubmit="submitForm()">
+            <div class="row">
+              <div class="col">
+                <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
+              </div>
+              <br>
+              <div class="col">
+                <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
+              </div>
             </div>
             <br>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Last Name">
-            </div>
-            <br>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2">
-              <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
-            </div>
-            <br>
-            <label for="basic-url">Your Homepage URL</label>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon3">http://shilloi.iitg.ernet.in/</span>
-              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-            </div>
-            <br>
-            <div class="input-group">
-              <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-              <span class="input-group-addon">.00</span>
-            </div>
-            <br>
-            <div class="input-group">
-              <span class="input-group-addon">$</span>
-              <span class="input-group-addon">0.00</span>
-              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" name="webmail" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
+                  <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
+                </div>
+
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="custom-file d-block">
+                    <input data-toggle="custom-file" data-target="#imfile" type="file" name="image" accept="image/png" class="custom-file-input">
+                    <span id="imfile" class="custom-file-control custom-file-name text-muted" data-content="An image (optional)"></span>
+                  </label>
+                </div>
+              </div>
             </div>
 
-            <br>
-            <div class="col-md-4 offset-md-4">
-              <button type="button" class="btn btn-outline-light btn-block">Go!</button>
+            <!---
+            <h6 class="text-center">Your Homepage URL</h6>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon3">http://shilloi.iitg.ernet.in/</span>
+              <input type="text" name="url" class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
             </div>
+            -->
+            <br>
+
+            <h6 class="text-center">Courses</h6>
+
+                  <div class="container text-left">
+                  <div class="row">
+                    <div class="col">
+                    <div class="form-check">
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" name="course1" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">CS204 - Algorithms</span>
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" name="course2" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">CS202 - Discrete Mathematics</span>
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" name="course3" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">CS346 - Compilers</span>
+                      </label>
+                    </div>
+
+                  <div class="form-check">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" name="course4" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description">CS461 - Computer Graphics</span>
+                      </label>
+                  </div>
+
+                </div>
+
+                <div class="col">
+                <div class="form-check">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" name="course5" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">CS301 - Theory of Computation</span>
+                    </label>
+                </div>
+
+                <div class="form-check">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" name="course6" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">CS221 - Digital Design</span>
+                    </label>
+                </div>
+
+                <div class="form-check">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" name="course7" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">CS341 - Operating Systems</span>
+                  </label>
+                </div>
+
+              <div class="form-check">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" name="course8" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">CS343 - Data Communication</span>
+                  </label>
+              </div>
+              </div>
+              </div>
+              </div>
+
+            <h6 class="text-center">Themes</h6>
+            <div id="themesdiv" class="container text-center col-md-8">
+            <div class="form-check form-check-inline">
+              <label class="custom-control custom-radio">
+                <input id="theme1radio" name="theme" type="radio" value="theme1" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                <div id="colourbox1"></div>
+              </label>
+              <label class="custom-control custom-radio">
+                <input id="theme2radio" name="theme" type="radio" value="theme2" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                <div id="colourbox2"></div>
+              </label>
+              <label class="custom-control custom-radio">
+                <input id="theme3radio" name="theme" type="radio" value="theme3" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                <div id="colourbox3"></div>
+              </label>
+            </div>
+            </div>
+            <br>
+
+            <!-- Button trigger modal -->
+              <div class="col-md-4 offset-md-4">
+                <button type="button" class="btn btn-outline-light btn-block" data-toggle="modal" data-target="#submitModal">
+                  Go!
+                </button>
+              </div>
+              <!-- Modal -->
+              <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="submitModalLabel">Are you sure?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Ensure all the details are filled out accurately before proceeding. <br>You will be taken to your own page on clicking 'Continue' below.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" id="submitbutton">Continue</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </main>
 
           <footer class="mastfoot">
             <div class="inner">
-              <p>Just a click away from a personalized homepage...</p>
+              <p>You're just a click away from a new homepage!</p>
             </div>
           </footer>
 
         </div>
 
       </div>
-
     </div>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./lodash.js"></script>
     <script>window.jQuery || document.write('<script src="./jquery-3.2.1.min.js"><\/script>')</script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./bootstrap-select-1.12.4/dist/css/bootstrap-select.min.css">
+    <script src="./bootstrap-select-1.12.4/dist/js/bootstrap-select.min.js"></script>
     <script src="./popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./introform.js"></script>
 
   </body>
 </html>
