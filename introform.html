@@ -18,6 +18,7 @@
 
   <body>
 
+
     <!-- modalPageGen -->
     <div class="modal fade" id="modalPageGen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -74,6 +75,8 @@
       </div>
     </div>
 
+
+
     <div class="site-wrapper">
 
       <div class="site-wrapper-inner">
@@ -96,7 +99,8 @@
           </header>
 
           <main role="main" class="inner cover">
-            <form action="main.html" method="POST" onsubmit="return submitForm()">
+            <form action="main.html" method="POST">
+            <!---
             <div class="row">
               <div class="col">
                 <input id="fname" type="text" name="firstname" class="form-control" value="Ameya" placeholder="First Name" required>
@@ -106,17 +110,21 @@
                 <input id="lname" type="text" name="lastname" class="form-control" value="Daigavane" placeholder="Last Name" required>
               </div>
             </div>
+            -->
             <br>
 
-            <div class="row">
-              <div class="col-md-6">
+
+              <div class="col-md-6 offset-md-3">
+                <h6 class="text-center">Webmail</h6>
                 <div class="input-group">
-                  <input id="webmail" type="text" name="webmail" class="form-control" value="ameya.daigavane" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
+                  <input id="webmail" type="text" name="webmail" class="form-control" value="ameya.daigavane" placeholder="Faculty Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
                   <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
                 </div>
-
               </div>
+              <br>
+
               <div class="col">
+                <h6 class="text-center">A picture, please?</h6>
                 <div class="form-group">
                   <label class="custom-file d-block">
                     <input data-toggle="custom-file" data-target="#imfile" type="file" name="image" accept="image/png" class="custom-file-input">
@@ -124,7 +132,7 @@
                   </label>
                 </div>
               </div>
-            </div>
+
 
             <!---
             <h6 class="text-center">Your Homepage URL</h6>
@@ -133,7 +141,6 @@
               <input type="text" name="url" class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
             </div>
             -->
-            <br>
 
             <h6 class="text-center">Courses</h6>
 
@@ -214,19 +221,19 @@
             <div id="themesdiv" class="container text-center col-md-8">
             <div class="form-check form-check-inline">
               <label class="custom-control custom-radio">
-                <input id="theme1radio" name="theme" type="radio" value="theme1" class="custom-control-input">
+                <input id="theme1radio" name="theme" type="radio" value="1" class="custom-control-input" checked>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"></span>
                 <div id="colourbox1"></div>
               </label>
               <label class="custom-control custom-radio">
-                <input id="theme2radio" name="theme" type="radio" value="theme2" class="custom-control-input">
+                <input id="theme2radio" name="theme" type="radio" value="2" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"></span>
                 <div id="colourbox2"></div>
               </label>
               <label class="custom-control custom-radio">
-                <input id="theme3radio" name="theme" type="radio" value="theme3" class="custom-control-input">
+                <input id="theme3radio" name="theme" type="radio" value="3" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"></span>
                 <div id="colourbox3"></div>
@@ -241,6 +248,9 @@
                   Go!
                 </button>
               </div>
+
+
+
               <!-- Modal -->
               <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -252,10 +262,17 @@
                       </button>
                     </div>
                     <div class="modal-body">
+                      <!--- alert --->
+                      <div id="alertbox" class="alert alert-danger alert-dismissible collapse" role="alert">
+                        <button type="button" class="close" data-hide="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Error!</strong> Please ensure a faculty webmail ID is entered.
+                      </div>
                       Ensure all the details are filled out accurately before proceeding. <br>You will be taken to your own page on clicking 'Continue' below.
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" id="closemodal" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary" id="submitbutton">Continue</button>
                     </div>
                   </div>

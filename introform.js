@@ -50,16 +50,67 @@ $('body').on('change', 'input[type="file"][data-toggle="custom-file"]', function
        form.submit();
    }
 
-function submitForm(passForm)
-{
-    console.log("submitted");
+// alert message
+   $("[data-hide]").on("click", function(){
+           $('#alertbox').hide();
+    });
 
-    var passdata = {
-    'webmail' : $("#webmail").val(),
-    'fname' : $("#fname").val(),
-    'lname' : $("#lname").val()
-    };
+   $("#submitModal").on("hidden.bs.modal", function(){
+           $('#alertbox').hide();
+    });
 
-    console.log(passdata);
-    localStorage.setItem('details', JSON.stringify(passdata));
-}
+// check if webmail is valid
+$(document).ready(function() {
+   $("form").submit(function (e) {
+     // search webmail.txt for webmail - if found, read from text file
+     // else read from localStorage
+     var pos = -1;
+     var foundemail = false;
+     var webmail = $("#webmail").val();
+     $.ajax({
+       url:"./data/email.txt",
+       async: false,
+       success: function (data){
+         //console.log(data);
+         var lines = data.split('\n');
+
+         for (var i = 0; i < lines.length; i++) {
+           if(lines[i].replace(/\s/g, "") == webmail)
+           {
+             pos = i;
+             foundemail = true;
+             break;
+           }
+         }
+       }
+     });
+
+     if (!foundemail) {
+       console.log("stopped!");
+       $("#alertbox").show();
+       e.preventDefault();
+       return false;
+     }
+     else {
+       console.log("submitted");
+       var passdata = {
+          'webmail' : $("#webmail").val(),
+          'pos' : pos,
+          'imgsrc' : $("#imfile").val(),
+          'CS204 - Algorithms' : $('input[name="course1"]').is(':checked'),
+          'CS202 - Discrete Mathematics' : $('input[name="course2"]').is(':checked'),
+          'CS346 - Compilers' :  $('input[name="course3"]').is(':checked'),
+          'CS461 - Computer Graphics' :  $('input[name="course4"]').is(':checked'),
+          'CS301 - Theory of Computation' :  $('input[name="course5"]').is(':checked'),
+          'CS221 - Digital Design' :  $('input[name="course6"]').is(':checked'),
+          'CS341 - Operating Systems' :  $('input[name="course7"]').is(':checked'),
+          'CS343 - Data Communication' :  $('input[name="course8"]').is(':checked'),
+          'theme' : $('input[name="theme"]:checked').val()
+          };
+
+       console.log(passdata);
+       localStorage.setItem('details', JSON.stringify(passdata));
+     }
+
+   });
+ });

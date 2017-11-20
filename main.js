@@ -5,51 +5,94 @@ function loaddata()
   var details = JSON.parse(localStorage.getItem('details'));
   console.log(details);
 
+  // change colors if not theme1
+  if(details.theme != "theme1")
+  {
+    $('link[href="./main1.css"]').attr({href : "./main" + details.theme.replace("theme", "") + ".css"});
+    $("#roomdiv").attr("class", "list-group-item list-group-item-dark");
+    $("#phonediv").attr("class", "list-group-item list-group-item-secondary");
+    $("#emaildiv").attr("class", "list-group-item list-group-item-dark");
+  }
 
-  $.ajax({
-    url:"./load.php",
-    data: details.webmail,
-    success: function (data){
-      console.log(data);
-      var lines = data.split('\n');
+    var headingname, maintitle, headingtitle, email, imgsrc, room, phone;
+    // AJAX calls to different files
+    // name
+    $.ajax({
+      url:"./data/name.txt",
+      success: function (data){
+        //console.log(data);
+        var lines = data.split('\n');
 
-      // first name + last name
-      // trim whitespace
-      $("#headingname").text(lines[0].replace(/\s/g, "")  + " " + lines[1].replace(/\s/g, ""));
-      document.title = lines[0].replace(/\s/g, "")  + " " + lines[1].replace(/\s/g, "") + " at IIT Guwahati";
+        headingname = lines[details.pos];
+        $("#headingname").text(headingname);
+        maintitle = headingname + " at IIT Guwahati";
+        document.title = maintitle;
 
-      // title
-      if(lines[2].replace(/\s/g, "") != "NULL")
-      {
-        $("#headingtitle").text(lines[2]);
       }
-      // email
-      $("#email").text(lines[3]);
+    });
 
-      // image source
-      if(lines[4] != "NULL")
-      {
-        $("#headingimage").src = lines[4];
+    // title
+    $.ajax({
+      url:"./data/title.txt",
+      success: function (data){
+        //console.log(data);
+        var lines = data.split('\n');
+
+        headingtitle = lines[details.pos];
+        $("#headingtitle").text(headingtitle);
+
       }
+    });
 
-      // courses
-      for(var i = 5; i < 13; i++)
-      {
-        //$("#image")
+    // research
+    $.ajax({
+      url:"./data/research.txt",
+      success: function (data){
+        //console.log(data);
+        var lines = data.split('\n');
+
+        $("#research").text(lines[details.pos]);
+
       }
+    });
 
-      // theme
-      // change colors if not theme1
-      if(lines[13].replace(/\s/g, "") != "theme1")
-      {
-        $('link[href="./main1.css"]').attr({href : "./main" + lines[13].replace("theme", "") + ".css"});
-        $("#roomdiv").attr("class", "list-group-item list-group-item-dark");
-        $("#phonediv").attr("class", "list-group-item list-group-item-secondary");
-        $("#emaildiv").attr("class", "list-group-item list-group-item-dark");
+    // room
+    $.ajax({
+      url:"./data/room.txt",
+      success: function (data){
+      //  console.log(data);
+        var lines = data.split('\n');
+
+        room = lines[details.pos] + ", CSE Department";
+        $("#room").text(room);
       }
+    });
 
-    }
-  });
+    // phone
+    $.ajax({
+      url:"./data/phone.txt",
+      success: function (data){
+      //  console.log(data);
+        var lines = data.split('\n');
+
+        phone = lines[details.pos];
+        $("#phone").text(phone);
+
+      }
+    });
+
+
+  email = details.webmail;
+  $("#email").text(email);
+
+  imgsrc = details.imgsrc;
+  if(imgsrc != "NULL")
+  {
+    $("#headingimage").src = imgsrc;
+  }
+
+  // courses
+
 };
 
 $(document).ready(loaddata());
@@ -59,7 +102,7 @@ function savefile()
 {
   var dataobj = {'name' :  $("#headingname").text().split(' '), 'html' : $('html').html()};
   $.ajax({
-    type: "POST",
+    type: "details.posT",
     url:"./save.php",
     data: JSON.stringify(dataobj),
     success: function(data){
