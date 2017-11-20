@@ -53,7 +53,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="ModalCreatorsLabel">
               Created By
-              <small class="text-muted">Three students at IIT Guwahati</small>
+              <small class="text-muted">Two students at IIT Guwahati</small>
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -64,7 +64,6 @@
 
                 <li class="list-group-item list-group-item-dark">Ameya Daigavane</li>
                 <li class="list-group-item list-group-item-light">Akul Agrawal</li>
-                <li class="list-group-item list-group-item-dark">Divyam Agarwal</li>
             </ul>
 
           </div>
@@ -97,14 +96,14 @@
           </header>
 
           <main role="main" class="inner cover">
-            <form action="submit.php" method="POST" onsubmit="submitForm()">
+            <form action="main.html" method="POST" onsubmit="return submitForm()">
             <div class="row">
               <div class="col">
-                <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
+                <input id="fname" type="text" name="firstname" class="form-control" value="Ameya" placeholder="First Name" required>
               </div>
               <br>
               <div class="col">
-                <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
+                <input id="lname" type="text" name="lastname" class="form-control" value="Daigavane" placeholder="Last Name" required>
               </div>
             </div>
             <br>
@@ -112,7 +111,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="input-group">
-                  <input type="text" name="webmail" class="form-control" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
+                  <input id="webmail" type="text" name="webmail" class="form-control" value="ameya.daigavane" placeholder="Webmail ID" aria-label="Webmail ID" aria-describedby="basic-addon2" required>
                   <span class="input-group-addon" id="basic-addon2">@iitg.ernet.in</span>
                 </div>
 

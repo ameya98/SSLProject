@@ -1,8 +1,14 @@
 // AJAX - load from txt file
 function loaddata()
 {
+  // get details from localStorage
+  var details = JSON.parse(localStorage.getItem('details'));
+  console.log(details);
+
+
   $.ajax({
-    url:"./data/formdata.txt",
+    url:"./load.php",
+    data: details.webmail,
     success: function (data){
       console.log(data);
       var lines = data.split('\n');
@@ -17,7 +23,6 @@ function loaddata()
       {
         $("#headingtitle").text(lines[2]);
       }
-
       // email
       $("#email").text(lines[3]);
 
@@ -49,6 +54,19 @@ function loaddata()
 
 $(document).ready(loaddata());
 
+// save file
+function savefile()
+{
+  var dataobj = {'name' :  $("#headingname").text().split(' '), 'html' : $('html').html()};
+  $.ajax({
+    type: "POST",
+    url:"./save.php",
+    data: JSON.stringify(dataobj),
+    success: function(data){
+      $('#downloadlink').attr({href :  "./" + $("#headingname").text().split(' ') + ".html"});
+    }
+  })
+};
 // date
 $(function () {
                 $('#datetimepicker1').datetimepicker();

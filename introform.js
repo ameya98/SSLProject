@@ -54,5 +54,12 @@ function submitForm(passForm)
 {
     console.log("submitted");
 
+    var passdata = {
+    'webmail' : $("#webmail").val(),
+    'fname' : $("#fname").val(),
+    'lname' : $("#lname").val()
+    };
 
+    console.log(passdata);
+    localStorage.setItem('details', JSON.stringify(passdata));
 }
