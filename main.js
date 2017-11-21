@@ -6,12 +6,17 @@ function loaddata()
   console.log(details);
 
   // change colors if not theme1
-  if(details.theme != "theme1")
+  if(details.theme != "1")
   {
     $('link[href="./main1.css"]').attr({href : "./main" + details.theme.replace("theme", "") + ".css"});
     $("#roomdiv").attr("class", "list-group-item list-group-item-dark");
     $("#phonediv").attr("class", "list-group-item list-group-item-secondary");
     $("#emaildiv").attr("class", "list-group-item list-group-item-dark");
+    $("#p1").attr("class", "list-group-item list-group-item-dark");
+    $("#p2").attr("class", "list-group-item list-group-item-secondary");
+    $("#p3").attr("class", "list-group-item list-group-item-dark");
+    $("#p4").attr("class", "list-group-item list-group-item-secondary");
+    $(".badge").attr("class", "badge badge-dark float-right badge-pill");
   }
 
     var headingname, maintitle, headingtitle, email, imgsrc, room, phone;
@@ -25,9 +30,18 @@ function loaddata()
 
         headingname = lines[details.pos];
         $("#headingname").text(headingname);
+
         maintitle = headingname + " at IIT Guwahati";
         document.title = maintitle;
 
+        initialarray = headingname.split(' ');
+        initials = "";
+        for(pos in initialarray)
+        {
+          initials += initialarray[pos].charAt(0);
+        }
+
+        $("a[class='navbar-brand']").text(initials);
       }
     });
 
@@ -88,7 +102,7 @@ function loaddata()
   imgsrc = details.imgsrc;
   if(imgsrc != "NULL")
   {
-    $("#headingimage").src = imgsrc;
+    $("#headingimage").attr("src", "./images/" + imgsrc);
   }
 
   // courses
@@ -182,11 +196,22 @@ function handleSignoutClick(event) {
        gapi.auth2.getAuthInstance().signOut();
      }
 
+// alert message
+        $("[data-hide]").on("click", function(){
+                $('#alertbox1').hide();
+                $('#alertbox2').hide();
+         });
+
+        $("#submitModal").on("hidden.bs.modal", function(){
+                $('#alertbox1').hide();
+                $('#alertbox2').hide();
+         });
+
 function addmeeting()
 {
   var fullname = document.getElementById('fullname').value;
-  var starttime = moment(document.getElementById('datetime').value).format();
-  var endtime = moment(document.getElementById('datetime').value).add(1, 'hours').format();
+  var starttime = moment(document.getElementById('datetime').value, 'MM/DD/YYYY HH:mm ZZ').format();
+  var endtime = moment(document.getElementById('datetime').value, 'MM/DD/YYYY HH:mm ZZ').add(1, 'hours').format();
 
   console.log(starttime, endtime);
   addevent(starttime, endtime, "Meeting with " + fullname);
@@ -194,28 +219,60 @@ function addmeeting()
 
 function addevent(starttime, endtime, title)
 {
-  var resource = {
-   "end": {
-    "dateTime": endtime,
-    "timeZone": "Asia/Kolkata"
-   },
-   "start": {
-    "dateTime": starttime,
-    "timeZone": "Asia/Kolkata"
-   },
-   "summary": title
+  // check if free first
 
-  };
-
-
-  var request = gapi.client.calendar.events.insert({
-    'calendarId': 'primary',
-    'resource': resource
+  var busyquery = gapi.client.calendar.freebusy.query({
+    "timeMin": starttime,
+    "timeMax": endtime,
+    "timeZone": "Asia/Kolkata",
+    "items": [
+      {
+        "id": "primary"
+      }
+    ]
   });
 
-  request.execute();
+  var free = false;
+  busyquery.execute(function(resp) {
+            if(resp.calendars.primary.busy.length > 0)
+            {
+              console.log("I'm busy");
+              $("#alertbox1").show();
+              $("#alertbox2").hide();
+            }
+            else {
+              console.log("Free!");
+              $("#alertbox1").hide();
+              $("#alertbox2").show();
+              free = true;
+            }
 
-  // reload calendar
-  document.getElementById('calendar').src = document.getElementById('calendar').src;
+            if(free)
+            {
+              var resource = {
+                "end": {
+                  "dateTime": endtime,
+                  "timeZone": "Asia/Kolkata"
+                },
+                "start": {
+                  "dateTime": starttime,
+                  "timeZone": "Asia/Kolkata"
+                },
+                "summary": title
+
+              };
+
+
+              var request = gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': resource
+              });
+
+              request.execute();
+
+              // reload calendar
+              document.getElementById('calendar').src = document.getElementById('calendar').src;
+            }
+        });
 
 };

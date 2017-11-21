@@ -3,6 +3,11 @@ body {
   padding-top: 3.5rem;
 }
 
+
+.btn-sm {
+  line-height: 2;
+}
+
 /* Modal */
 
 .modal{

@@ -69,7 +69,7 @@ $(document).ready(function() {
      var webmail = $("#webmail").val();
      $.ajax({
        url:"./data/email.txt",
-       async: false,
+       async:false,
        success: function (data){
          //console.log(data);
          var lines = data.split('\n');
@@ -82,35 +82,40 @@ $(document).ready(function() {
              break;
            }
          }
-       }
-     });
+   }});
 
-     if (!foundemail) {
-       console.log("stopped!");
-       $("#alertbox").show();
-       e.preventDefault();
-       return false;
-     }
-     else {
-       console.log("submitted");
-       var passdata = {
-          'webmail' : $("#webmail").val(),
-          'pos' : pos,
-          'imgsrc' : $("#imfile").val(),
-          'CS204 - Algorithms' : $('input[name="course1"]').is(':checked'),
-          'CS202 - Discrete Mathematics' : $('input[name="course2"]').is(':checked'),
-          'CS346 - Compilers' :  $('input[name="course3"]').is(':checked'),
-          'CS461 - Computer Graphics' :  $('input[name="course4"]').is(':checked'),
-          'CS301 - Theory of Computation' :  $('input[name="course5"]').is(':checked'),
-          'CS221 - Digital Design' :  $('input[name="course6"]').is(':checked'),
-          'CS341 - Operating Systems' :  $('input[name="course7"]').is(':checked'),
-          'CS343 - Data Communication' :  $('input[name="course8"]').is(':checked'),
-          'theme' : $('input[name="theme"]:checked').val()
-          };
+   if (!foundemail) {
+     console.log("stopped!");
+     $("#alertbox").show();
+     e.preventDefault();
+     return false;
+   }
+   else {
+     console.log("submitted");
 
-       console.log(passdata);
-       localStorage.setItem('details', JSON.stringify(passdata));
+     var imgsrc = "NULL";
+     if($("#imfile").attr('data-content') != "An image (optional)")
+     {
+       imgsrc = $("#imfile").attr('data-content');
      }
 
-   });
+     var passdata = {
+        'webmail' : $("#webmail").val(),
+        'pos' : pos,
+        'imgsrc' : imgsrc,
+        'CS204 - Algorithms' : $('input[name="course1"]').is(':checked'),
+        'CS202 - Discrete Mathematics' : $('input[name="course2"]').is(':checked'),
+        'CS346 - Compilers' :  $('input[name="course3"]').is(':checked'),
+        'CS461 - Computer Graphics' :  $('input[name="course4"]').is(':checked'),
+        'CS301 - Theory of Computation' :  $('input[name="course5"]').is(':checked'),
+        'CS221 - Digital Design' :  $('input[name="course6"]').is(':checked'),
+        'CS341 - Operating Systems' :  $('input[name="course7"]').is(':checked'),
+        'CS343 - Data Communication' :  $('input[name="course8"]').is(':checked'),
+        'theme' : $('input[name="theme"]:checked').val()
+        };
+
+     console.log(passdata);
+     localStorage.setItem('details', JSON.stringify(passdata));
+   }
+  });
  });

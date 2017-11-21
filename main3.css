@@ -3,8 +3,8 @@ body {
   padding-top: 3.5rem;
 }
 
-.btn-default {
-  line-height: 1;
+.btn-sm {
+  line-height: 2;
 }
 /* Modal */
 .modal{
