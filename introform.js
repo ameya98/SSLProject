@@ -103,14 +103,16 @@ $(document).ready(function() {
         'webmail' : $("#webmail").val(),
         'pos' : pos,
         'imgsrc' : imgsrc,
-        'CS204 - Algorithms' : $('input[name="course1"]').is(':checked'),
+        'CS201 - Data Structures' : $('input[name="course1"]').is(':checked'),
         'CS202 - Discrete Mathematics' : $('input[name="course2"]').is(':checked'),
-        'CS346 - Compilers' :  $('input[name="course3"]').is(':checked'),
-        'CS461 - Computer Graphics' :  $('input[name="course4"]').is(':checked'),
+        'CS221 - Digital Design' :  $('input[name="course3"]').is(':checked'),
+        'CS205M - Theoretical Foundations' :  $('input[name="course4"]').is(':checked'),
         'CS301 - Theory of Computation' :  $('input[name="course5"]').is(':checked'),
-        'CS221 - Digital Design' :  $('input[name="course6"]').is(':checked'),
-        'CS341 - Operating Systems' :  $('input[name="course7"]').is(':checked'),
-        'CS343 - Data Communication' :  $('input[name="course8"]').is(':checked'),
+        'CS341 - Operating Systems' :  $('input[name="course6"]').is(':checked'),
+        'CS343 - Data Communication' :  $('input[name="course7"]').is(':checked'),
+        'CS322M - Digital Logic and Computer Architecture' :  $('input[name="course8"]').is(':checked'),
+        'CS461 - Computer Graphics' :  $('input[name="course9"]').is(':checked'),
+        'CS441M - Software Engineering' :  $('input[name="course10"]').is(':checked'),
         'theme' : $('input[name="theme"]:checked').val()
         };
 

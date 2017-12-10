@@ -1,9 +1,78 @@
+// calendar
+var CLIENT_ID = '368873152645-6817bgr1i23hk3aig7du1u2bu6s82o3q.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyBjtLM_O5xj5ASZixVzGRkempSuZAHGymQ';
+
+// Array of API discovery doc URLs for APIs used by the quickstart
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+var SCOPES = "https://www.googleapis.com/auth/calendar";
+
+var authorizeButton = document.getElementById('authorize-button');
+var signoutButton = document.getElementById('signout-button');
+
+function handleClientLoad() {
+  gapi.load('client:auth2', initClient);
+}
+
+/**
+*  Initializes the API client library and sets up sign-in state
+*  listeners.
+*/
+function initClient() {
+  gapi.client.init({
+    apiKey: API_KEY,
+    clientId: CLIENT_ID,
+    discoveryDocs: DISCOVERY_DOCS,
+    scope: SCOPES
+  }).then(function () {
+    // Listen for sign-in state changes.
+    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+    // Handle the initial sign-in state.
+    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    authorizeButton.onclick = handleAuthClick;
+    signoutButton.onclick = handleSignoutClick;
+
+  });
+}
+
+/**
+*  Called when the signed in status changes, to update the UI
+*  appropriately. After a sign-in, the API is called.
+*/
+function updateSigninStatus(isSignedIn) {
+  if (isSignedIn) {
+    authorizeButton.style.display = 'none';
+    signoutButton.style.display = 'inline-block';
+  } else {
+    authorizeButton.style.display = 'inline-block';
+    signoutButton.style.display = 'none';
+  }
+}
+
+/**
+*  Sign in the user upon button click.
+*/
+function handleAuthClick(event) {
+  gapi.auth2.getAuthInstance().signIn();
+}
+
+/**
+*  Sign out the user upon button click.
+*/
+function handleSignoutClick(event) {
+  gapi.auth2.getAuthInstance().signOut();
+}
+
 // AJAX - load from txt file
 function loaddata()
 {
   // get details from localStorage
   var details = JSON.parse(localStorage.getItem('details'));
-  console.log(details);
+  //console.log(details);
+
 
   // change colors if not theme1
   if(details.theme != "1")
@@ -42,8 +111,46 @@ function loaddata()
         }
 
         $("a[class='navbar-brand']").text(initials);
-      }
-    });
+
+        // google search for papers
+        $.ajax({
+          type: "POST",
+          url:"./papers.php",
+          data: { fullname : headingname},
+          success: function (){
+            console.log("added research papers.");
+            $.ajax({
+              url:"./data/papers.txt",
+              success: function (data){
+                var lines = data.split('\n');
+
+                // remove empty strings
+                for (var i = 1; i <= 4; i++)
+                {
+                  var linktext;
+                  if(lines[i].split('*').filter(Boolean)[0].length > 75)
+                  {
+                    linktext = lines[i].split('*').filter(Boolean)[0].substr(0, 75) + "...";
+                  }
+                  else
+                  {
+                    linktext = lines[i].split('*').filter(Boolean)[0];
+                  }
+
+                  $('#link' + i).text(linktext);
+                  $('#p' + i).attr("href", lines[i].split('*').filter(Boolean)[1]);
+                }
+
+
+              }
+            });
+        }
+      });
+
+    }
+  });
+
+
 
     // title
     $.ajax({
@@ -105,104 +212,88 @@ function loaddata()
     $("#headingimage").attr("src", "./images/" + imgsrc);
   }
 
-  // courses
-
-};
-
-$(document).ready(loaddata());
-
-// save file
-function savefile()
-{
-  var dataobj = {'name' :  $("#headingname").text().split(' '), 'html' : $('html').html()};
+  // only once calendar is loaded
+  $("#calendar").one('load', function() {
   $.ajax({
-    type: "details.posT",
-    url:"./save.php",
-    data: JSON.stringify(dataobj),
-    success: function(data){
-      $('#downloadlink').attr({href :  "./" + $("#headingname").text().split(' ') + ".html"});
+    url:"./data/timet.txt",
+    success: function (data){
+      //console.log(data);
+      var lines = data.split('\n');
+
+      var coursename;
+      for (var i = 0; i < lines.length; i++) {
+
+        var times = lines[i].split(/\s+/);
+        var coursename = times[0].trim();
+
+        var valid = false;
+        for(var property in details)
+        {
+            if((details.hasOwnProperty(property)) && (property.indexOf(coursename) !== -1))
+            {
+              //console.log(property, "and", coursename);
+              if(details[property] == true)
+              {
+                valid = true;
+                coursename = property;
+                break;
+              }
+            }
+        }
+
+        if(!valid)
+        {
+        //  console.log(coursename, "not taken.");
+          continue;
+        }
+        else
+        {
+        //  console.log(coursename, "taken!");
+        }
+
+        for (var j = 1; j < times.length; ++j)
+        {
+          if((times[j] != "NULL") && (times[j].length != 0))
+          {
+            // console.log(times[j]);
+
+            var starttime = moment(times[j], 'YYYY-MM-DD HH:mm:ss').subtract(5, 'weeks').format();
+            var endtime = moment(times[j], 'YYYY-MM-DD HH:mm:ss').subtract(5, 'weeks').add(1, 'hours').format();
+
+            //console.log(starttime, endtime, coursename);
+            addevent(starttime, endtime, coursename, ["RRULE:FREQ=WEEKLY;UNTIL=20180301T170000Z"]);
+
+          }
+        }
+      }
     }
-  })
+  });
+});
 };
+
+$(document).ready(function() {loaddata();});
 // date
 $(function () {
                 $('#datetimepicker1').datetimepicker();
             });
 
-// calendar
-var CLIENT_ID = '368873152645-6817bgr1i23hk3aig7du1u2bu6s82o3q.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyBjtLM_O5xj5ASZixVzGRkempSuZAHGymQ';
 
-// Array of API discovery doc URLs for APIs used by the quickstart
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+// hide alerts
+        $("#requestmeeting").one("click", function (){
+          $('#alertbox1').hide();
+          $('#alertbox2').hide();
+        });
 
-// Authorization scopes required by the API; multiple scopes can be
-// included, separated by spaces.
-var SCOPES = "https://www.googleapis.com/auth/calendar";
-
-var authorizeButton = document.getElementById('authorize-button');
-var signoutButton = document.getElementById('signout-button');
-
-function handleClientLoad() {
-       gapi.load('client:auth2', initClient);
-     }
-
-     /**
-      *  Initializes the API client library and sets up sign-in state
-      *  listeners.
-      */
-function initClient() {
-       gapi.client.init({
-         apiKey: API_KEY,
-         clientId: CLIENT_ID,
-         discoveryDocs: DISCOVERY_DOCS,
-         scope: SCOPES
-       }).then(function () {
-         // Listen for sign-in state changes.
-         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-         // Handle the initial sign-in state.
-         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-         authorizeButton.onclick = handleAuthClick;
-         signoutButton.onclick = handleSignoutClick;
-       });
-     }
-
-     /**
-      *  Called when the signed in status changes, to update the UI
-      *  appropriately. After a sign-in, the API is called.
-      */
-function updateSigninStatus(isSignedIn) {
-       if (isSignedIn) {
-         authorizeButton.style.display = 'none';
-         signoutButton.style.display = 'inline-block';
-       } else {
-         authorizeButton.style.display = 'inline-block';
-         signoutButton.style.display = 'none';
-       }
-     }
-
-     /**
-      *  Sign in the user upon button click.
-      */
-function handleAuthClick(event) {
-       gapi.auth2.getAuthInstance().signIn();
-     }
-
-     /**
-      *  Sign out the user upon button click.
-      */
-function handleSignoutClick(event) {
-       gapi.auth2.getAuthInstance().signOut();
-     }
-
+        $('#alertbox1').hide();
+        $('#alertbox2').hide();
 // alert message
-        $("[data-hide]").on("click", function(){
+
+        $("#submitModal").on("hidden.bs.modal", function(){
                 $('#alertbox1').hide();
                 $('#alertbox2').hide();
          });
 
-        $("#submitModal").on("hidden.bs.modal", function(){
+        $("#submitModal").on("show", function(){
                 $('#alertbox1').hide();
                 $('#alertbox2').hide();
          });
@@ -210,14 +301,15 @@ function handleSignoutClick(event) {
 function addmeeting()
 {
   var fullname = document.getElementById('fullname').value;
-  var starttime = moment(document.getElementById('datetime').value, 'MM/DD/YYYY HH:mm ZZ').format();
-  var endtime = moment(document.getElementById('datetime').value, 'MM/DD/YYYY HH:mm ZZ').add(1, 'hours').format();
+  var starttime = moment(document.getElementById('datetime').value, 'MM/DD/YYYY hh:mm A').format();
+  var endtime = moment(document.getElementById('datetime').value, 'MM/DD/YYYY hh:mm A').add(1, 'hours').format();
 
   console.log(starttime, endtime);
-  addevent(starttime, endtime, "Meeting with " + fullname);
+  var rval = addevent(starttime, endtime, "Meeting with " + fullname);
+  return rval;
 }
 
-function addevent(starttime, endtime, title)
+function addevent(starttime, endtime, title, recurrence = [])
 {
   // check if free first
 
@@ -239,6 +331,7 @@ function addevent(starttime, endtime, title)
               console.log("I'm busy");
               $("#alertbox1").show();
               $("#alertbox2").hide();
+              return;
             }
             else {
               console.log("Free!");
@@ -258,7 +351,8 @@ function addevent(starttime, endtime, title)
                   "dateTime": starttime,
                   "timeZone": "Asia/Kolkata"
                 },
-                "summary": title
+                "summary": title,
+                "recurrence": recurrence
 
               };
 
@@ -272,7 +366,9 @@ function addevent(starttime, endtime, title)
 
               // reload calendar
               document.getElementById('calendar').src = document.getElementById('calendar').src;
+              return true;
             }
         });
+
 
 };
