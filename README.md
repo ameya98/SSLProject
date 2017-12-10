@@ -1,5 +1,9 @@
 # SSLProject
 
-You have to extract the Bootstrap zip into the same folder.  
+Extract the Bootstrap zip into the same folder.  
 
-main.html and introform.html are what I've made so far.
+The first page:
+![Form page](https://github.com/ameya98/SSLProject/blob/master/Screenshot%20(29).png)
+
+The generated page:
+![Main Page](https://github.com/ameya98/SSLProject/blob/master/Screenshot%20(31).png)
