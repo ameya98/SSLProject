@@ -3,7 +3,7 @@ CS241 Sysytems Software Laboratory - Final Project
 Made with Javascript, Python, Bootstrap and PHP.
 
 ## Installation
-Extract the Bootstrap zip into the same folder.  
+Extract the Bootstrap zip into the same folder, then open index.html. 
 
 ## Screenshots
 The first page:
